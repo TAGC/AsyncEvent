@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6A0EE000-3182-4EB4-A9D8-361FF34B46D8}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+		CHANGELOG.md = CHANGELOG.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncEvent", "src\AsyncEvent\AsyncEvent.csproj", "{D206F787-14AC-4B69-AE47-FA1FDAE8DF69}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncEvent.Tests", "test\AsyncEvent.Tests\AsyncEvent.Tests.csproj", "{2FC80E26-B920-4916-9EFA-B71735FFDFA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thermometer", "examples\Thermometer\Thermometer.csproj", "{1F0D6649-EF8B-4904-A780-C1F3E84C4B65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D206F787-14AC-4B69-AE47-FA1FDAE8DF69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D206F787-14AC-4B69-AE47-FA1FDAE8DF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D206F787-14AC-4B69-AE47-FA1FDAE8DF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D206F787-14AC-4B69-AE47-FA1FDAE8DF69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FC80E26-B920-4916-9EFA-B71735FFDFA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FC80E26-B920-4916-9EFA-B71735FFDFA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FC80E26-B920-4916-9EFA-B71735FFDFA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FC80E26-B920-4916-9EFA-B71735FFDFA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F0D6649-EF8B-4904-A780-C1F3E84C4B65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F0D6649-EF8B-4904-A780-C1F3E84C4B65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F0D6649-EF8B-4904-A780-C1F3E84C4B65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F0D6649-EF8B-4904-A780-C1F3E84C4B65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61BFAA90-BA45-4B05-98A6-69B50F51E3A6}
+	EndGlobalSection
+EndGlobal

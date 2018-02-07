@@ -94,6 +94,18 @@ namespace AsyncEvent.Tests
             await eventTask;
         }
 
+        [Fact]
+        internal async Task Exceptions_That_Occur_During_Event_Handling_Should_Be_Propagated()
+        {
+            var notifier = new NonGenericNotifier();
+
+            Task FaultyHandler(object sender, EventArgs eventArgs) => throw new InvalidOperationException();
+
+            notifier.SomethingHappened += FaultyHandler;
+
+            await Should.ThrowAsync<InvalidOperationException>(async () => await notifier.OnSomethingHappening());
+        }
+
         private class GenericNotifier
         {
             public event AsyncEventHandler<ExampleEventArgs> SomethingHappened;
