@@ -1,7 +1,7 @@
 ## AsyncEvent
 
 [![NuGet](https://img.shields.io/nuget/v/AsyncEvent.svg)](https://www.nuget.org/packages/AsyncEvent)
-[![Build status](https://ci.appveyor.com/api/projects/status/cpqt8jse4hgfabsx?svg=true)](https://ci.appveyor.com/project/TAGC/asyncevent)
+[![Build status](https://ci.appveyor.com/api/projects/status/3muupptlanmaspyc?svg=true)](https://ci.appveyor.com/project/TAGC/asyncevent)
 
 AsyncEvent is a small library that defines a delegate representing asynchronous event handlers, as well as extension methods
 for this delegate that can be used to fire events asynchronously.
