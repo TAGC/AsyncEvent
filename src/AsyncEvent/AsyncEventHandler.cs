@@ -34,9 +34,16 @@ namespace AsyncEvent
         /// <param name="eventHandler">This event handler.</param>
         /// <param name="sender">The object firing the event.</param>
         /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
-        /// <returns>A task that completes only when all registered handlers complete.</returns>
+        /// <returns>
+        /// A task that completes only when all registered handlers complete. A completed task is returned if the event handler is null.
+        /// </returns>
         public static Task InvokeAsync(this AsyncEventHandler eventHandler, object sender, EventArgs eventArgs)
         {
+            if (eventHandler == null)
+            {
+                return Task.CompletedTask;
+            }
+
             var delegates = eventHandler.GetInvocationList().Cast<AsyncEventHandler>();
             var tasks = delegates.Select(it => it.Invoke(sender, eventArgs));
 
