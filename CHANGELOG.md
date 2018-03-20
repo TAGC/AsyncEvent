@@ -1,5 +1,8 @@
 # Change Log
 
+## [v0.1.1](https://github.com/TAGC/AsyncEvent/tree/v0.1.1) (2018-03-20)
+[Full Changelog](https://github.com/TAGC/AsyncEvent/compare/v0.1.0...v0.1.1)
+
 ## [v0.1.0](https://github.com/TAGC/AsyncEvent/tree/v0.1.0) (2018-02-07)
 
 

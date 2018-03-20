@@ -6,6 +6,8 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>AsyncEvent</AssemblyName>
     <PackageId>AsyncEvent</PackageId>
+    <Authors>ThymineC</Authors>
+    <Copyright>MIT</Copyright>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/TAGC/AsyncEvent</RepositoryUrl>
   </PropertyGroup>

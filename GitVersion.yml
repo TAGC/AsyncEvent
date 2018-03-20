@@ -1,4 +1,18 @@
-next-version: 0.1.1
-branches: {}
+next-version: 0.1.2
+branches:
+  master:
+    increment: None
+  release:
+    increment: None
+  feature:
+    increment: None
+  pull-request:
+    increment: None
+  hotfix:
+    increment: None
+  support:
+    increment: None
+  develop:
+    increment: None
 ignore:
   sha: []
