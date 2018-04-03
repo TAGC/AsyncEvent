@@ -4,36 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Shouldly;
 using Xunit;
+using static AsyncEvent.Extensions;
 
 namespace AsyncEvent.Tests
 {
     public class AsyncEventSpec
     {
-        private class GenericNotifier
-        {
-            public event AsyncEventHandler<ExampleEventArgs> SomethingHappened;
-
-            public Task OnSomethingHappening(int value)
-            {
-                return SomethingHappened.InvokeAsync(this, new ExampleEventArgs {Value = value});
-            }
-        }
-
-        private class NonGenericNotifier
-        {
-            public event AsyncEventHandler SomethingHappened;
-
-            public Task OnSomethingHappening()
-            {
-                return SomethingHappened.InvokeAsync(this, EventArgs.Empty);
-            }
-        }
-
-        private class ExampleEventArgs
-        {
-            public int Value { get; set; }
-        }
-
         [Fact]
         internal async Task All_Handlers_Should_Finish_Before_Event_Task_Completes()
         {
@@ -45,10 +21,7 @@ namespace AsyncEvent.Tests
                 {
                     var tcs = new TaskCompletionSource<object>();
 
-                    Task RespondToSomethingHappening(object sender, EventArgs eventArgs)
-                    {
-                        return tcs.Task;
-                    }
+                    Task RespondToSomethingHappening(object sender, EventArgs eventArgs) => tcs.Task;
 
                     notifier.SomethingHappened += RespondToSomethingHappening;
 
@@ -76,10 +49,7 @@ namespace AsyncEvent.Tests
         {
             var notifier = new NonGenericNotifier();
 
-            Task FaultyHandler(object sender, EventArgs eventArgs)
-            {
-                throw new InvalidOperationException();
-            }
+            Task FaultyHandler(object sender, EventArgs eventArgs) => throw new InvalidOperationException();
 
             notifier.SomethingHappened += FaultyHandler;
 
@@ -91,7 +61,6 @@ namespace AsyncEvent.Tests
         {
             var notifier = new GenericNotifier();
             var tcs = new TaskCompletionSource<object>();
-
             int? value = null;
 
             async Task RespondToSomethingHappening(object sender, ExampleEventArgs eventArgs)
@@ -125,7 +94,6 @@ namespace AsyncEvent.Tests
         {
             var notifier = new NonGenericNotifier();
             var tcs = new TaskCompletionSource<object>();
-
             var eventFired = false;
 
             async Task RespondToSomethingHappening(object sender, EventArgs eventArgs)
@@ -144,6 +112,50 @@ namespace AsyncEvent.Tests
 
             await eventTask;
             eventFired.ShouldBeTrue();
+        }
+
+        [Fact]
+        internal async Task Non_Generic_Synchronous_Event_Handlers_Should_Be_Convertible_To_Equivalent_Asynchronous_Handlers()
+        {
+            var notifier = new NonGenericNotifier();
+            var eventFired = false;
+
+            notifier.SomethingHappened += Async((sender, args) => eventFired = true);
+
+            await notifier.OnSomethingHappening();
+            eventFired.ShouldBeTrue();
+        }
+
+        [Fact]
+        internal async Task Generic_Synchronous_Event_Handlers_Should_Be_Convertible_To_Equivalent_Asynchronous_Handlers()
+        {
+            var notifier = new GenericNotifier();
+            int? value = null;
+
+            notifier.SomethingHappened += Async<ExampleEventArgs>((sender, args) => value = args.Value);
+
+            await notifier.OnSomethingHappening(2);
+            value.ShouldBe(2);
+        }
+
+        private class ExampleEventArgs
+        {
+            public int Value { get; set; }
+        }
+
+        private class GenericNotifier
+        {
+            public event AsyncEventHandler<ExampleEventArgs> SomethingHappened;
+
+            public Task OnSomethingHappening(int value) =>
+                SomethingHappened.InvokeAsync(this, new ExampleEventArgs { Value = value });
+        }
+
+        private class NonGenericNotifier
+        {
+            public event AsyncEventHandler SomethingHappened;
+
+            public Task OnSomethingHappening() => SomethingHappened.InvokeAsync(this, EventArgs.Empty);
         }
     }
 }
