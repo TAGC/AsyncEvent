@@ -105,7 +105,7 @@ namespace Thermometer
         }
     }
 
-    public class TemperatureChangedEventArgs : EventArgs
+    public class TemperatureChangedEventArgs
     {
         public TemperatureChangedEventArgs(double celcius)
         {

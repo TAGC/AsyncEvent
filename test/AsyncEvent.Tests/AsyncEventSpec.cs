@@ -29,7 +29,7 @@ namespace AsyncEvent.Tests
             }
         }
 
-        private class ExampleEventArgs : EventArgs
+        private class ExampleEventArgs
         {
             public int Value { get; set; }
         }

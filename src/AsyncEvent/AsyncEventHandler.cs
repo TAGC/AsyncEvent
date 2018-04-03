@@ -8,7 +8,7 @@ namespace AsyncEvent
     /// Represents an asynchronous event handler.
     /// </summary>
     /// <param name="sender">The object firing the event.</param>
-    /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
+    /// <param name="eventArgs">The object containing the event data.</param>
     /// <returns>A task that completes when this handler is done handling the event.</returns>
     public delegate Task AsyncEventHandler(object sender, EventArgs eventArgs);
 
@@ -17,10 +17,9 @@ namespace AsyncEvent
     /// </summary>
     /// <typeparam name="TEventArgs">The type of the event arguments.</typeparam>
     /// <param name="sender">The object firing the event.</param>
-    /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
+    /// <param name="eventArgs">The object containing the event data.</param>
     /// <returns>A task that completes when this handler is done handling the event.</returns>
-    public delegate Task AsyncEventHandler<in TEventArgs>(object sender, TEventArgs eventArgs)
-        where TEventArgs : EventArgs;
+    public delegate Task AsyncEventHandler<in TEventArgs>(object sender, TEventArgs eventArgs);
 
     /// <summary>
     /// Provides extension methods for use with <see cref="AsyncEventHandler"/> and
@@ -33,7 +32,7 @@ namespace AsyncEvent
         /// </summary>
         /// <param name="eventHandler">This event handler.</param>
         /// <param name="sender">The object firing the event.</param>
-        /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="eventArgs">The object containing the event data.</param>
         /// <returns>
         /// A task that completes only when all registered handlers complete. A completed task is returned if the event handler is null.
         /// </returns>
@@ -56,13 +55,12 @@ namespace AsyncEvent
         /// <typeparam name="TEventArgs">The type of the event arguments.</typeparam>
         /// <param name="eventHandler">This event handler.</param>
         /// <param name="sender">The object firing the event.</param>
-        /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="eventArgs">The object containing the event data.</param>
         /// <returns>A task that completes only when all registered handlers complete.</returns>
         public static Task InvokeAsync<TEventArgs>(
             this AsyncEventHandler<TEventArgs> eventHandler,
             object sender,
             TEventArgs eventArgs)
-            where TEventArgs : EventArgs
         {
             var delegates = eventHandler.GetInvocationList().Cast<AsyncEventHandler<TEventArgs>>();
             var tasks = delegates.Select(it => it.Invoke(sender, eventArgs));
