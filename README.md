@@ -62,4 +62,23 @@ public class TemperatureRecorder
 }
 ```
 
+#### Interop with synchronous event handlers
+
+AsyncEvent is meant to allow the specification of events that may need to be handled asynchronously. However, there's potentially a lot of cases where this handling can be purely synchronous, such as if clients simply want to log the event.
+
+AsyncEvent exposes utility functions that allow synchronous event handlers to be adapted for use with asynchronous events. To make use of these, add `using static AsyncEvent.Extensions` in the source code, then wrap synchronous event handlers in `Async(...)` or `Async<TEventArgs>(...)`. For example:
+
+```cs
+using static AsyncEvent.Extensions;
+
+// ...
+
+thermometer.TemperatureChanged += Async<TemperatureChangedEventArgs>(
+    (s, e) => Console.WriteLine($"New temperature: {e.Celcius}°C"));
+```
+
+The adapted event handler will perform the same logic as the synchronous event handler and return a completed task.
+
+#### Examples
+
 Check under `examples/` for complete and runnable example projects.
