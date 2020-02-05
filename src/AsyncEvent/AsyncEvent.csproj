@@ -11,7 +11,4 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/TAGC/AsyncEvent</RepositoryUrl>
   </PropertyGroup>
-  <ItemGroup>
-    <DotNetCliToolReference Include="dotnet-setversion" Version="*" />
-  </ItemGroup>
 </Project>
