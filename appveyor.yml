@@ -5,12 +5,13 @@ branches:
   - develop
 install:
   - cinst gitversion.portable -y
+  - ps: dotnet tool install --global dotnet-setversion
 before_build:
   - nuget restore
   - ps: $env:VERSION=$(gitversion /showvariable NuGetVersionV2)
 build_script:
   - ps: dotnet restore
-  - ps: cd src/AsyncEvent; dotnet setversion $env:VERSION; cd ../..
+  - ps: cd src/AsyncEvent; setversion $env:VERSION; cd ../..
   - ps: dotnet build
   - ps: dotnet pack --include-source --include-symbols -c Release -o out/
 test_script:
