@@ -82,11 +82,19 @@ namespace AsyncEvent.Tests
         }
 
         [Fact]
-        internal void Invoke_Async_Should_Return_Completed_Task_If_No_Handlers_Are_Subscribed()
+        internal void Non_Generic_Invoke_Async_Should_Return_Completed_Task_If_No_Handlers_Are_Subscribed()
         {
             var notifier = new NonGenericNotifier();
 
             notifier.OnSomethingHappening().IsCompleted.ShouldBeTrue();
+        }
+
+        [Fact]
+        internal void Generic_Invoke_Async_Should_Return_Completed_Task_If_No_Handlers_Are_Subscribed()
+        {
+            var notifier = new GenericNotifier();
+
+            notifier.OnSomethingHappening(3).IsCompleted.ShouldBeTrue();
         }
 
         [Fact]
