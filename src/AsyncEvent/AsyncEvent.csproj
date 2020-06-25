@@ -7,7 +7,7 @@
     <AssemblyName>AsyncEvent</AssemblyName>
     <PackageId>AsyncEvent</PackageId>
     <Authors>ThymineC</Authors>
-    <Copyright>MIT</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/TAGC/AsyncEvent</RepositoryUrl>
   </PropertyGroup>
