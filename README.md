@@ -30,7 +30,7 @@ public class Thermometer
     public event AsyncEventHandler<TemperatureChangedEventArgs> TemperatureChanged;
 
     private Task OnTemperatureChanged(double newTemperature) =>
-        TemperatureChanged?.InvokeAsync(this, new TemperatureChangedEventArgs { Temperature = newTemperature });
+        TemperatureChanged.InvokeAsync(this, new TemperatureChangedEventArgs { Temperature = newTemperature });
 }
 
 public class TemperatureChangedEventArgs : EventArgs
